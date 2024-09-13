@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class WordOccurrence {
 
 	public static void main(String[] args) {
-		String fileName = "words.text"; // Replace with the path to your text file
+		String fileName = "words.text"; // Ensure this is the correct file path
         HashMap<String, Integer> wordOcc = new HashMap<>();
 
         try {
@@ -17,13 +17,10 @@ public class WordOccurrence {
             while (scanner.hasNext()) {
                 String word = scanner.next().toLowerCase(); // Read next word and convert to lowercase
 
-                if (!wordOcc.containsKey(word) && word.length() > 3) {
-                    if (!isDigit(word)) {
-                        wordOcc.put(word, 1); // Add new word with count 1
-                    }
-                    if (wordOcc.containsKey(word) && word.length() > 3) {
-                        wordOcc.put(word, wordOcc.get(word) + 1); // Increment existing word count
-                    }
+                // Check if the word length is greater than 3 and not a digit
+                if (word.length() > 3 && !isDigit(word)) {
+                    // Update the word count
+                    wordOcc.put(word, wordOcc.getOrDefault(word, 0) + 1);
                 }
             }
             scanner.close();
@@ -45,6 +42,5 @@ public class WordOccurrence {
             }
         }
         return true;
-	}
-
+    }
 }
