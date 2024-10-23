@@ -2,6 +2,7 @@ package org.howard.edu.lsp.midterm.question1;
 /**
  * For these questions, I coded in Python, then asked ChatGPT to help me translate to the proper syntax, etc. 
  * The Book class represents a book in a library with encapsulated attributes.
+ * New line to help commit
  */
 public class Book {
     private String title;

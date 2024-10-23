@@ -2,6 +2,7 @@ package org.howard.edu.lsp.midterm.question2;
 /**
  * For these questions, I coded in Python, then asked ChatGPT to help me translate to the proper syntax, etc.
  * The Calculator class provides utility methods to sum different types of numbers.
+ * New line to help commit
  */
 public class Calculator {
 

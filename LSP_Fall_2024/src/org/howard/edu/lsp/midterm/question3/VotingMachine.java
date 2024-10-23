@@ -6,6 +6,7 @@ import java.util.Map;
  * For these questions, I coded in Python, then asked ChatGPT to help me translate to the proper syntax, etc. 
  * The VotingMachine class represents a simplified electronic voting machine.
  * It maintains a list of candidates and their respective vote counts.
+ * New line to help commit
  */
 public class VotingMachine {
     private Map<String, Integer> candidates;

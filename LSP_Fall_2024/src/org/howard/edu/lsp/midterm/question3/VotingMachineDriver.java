@@ -1,6 +1,7 @@
 package org.howard.edu.lsp.midterm.question3;
 /**
  * The VotingMachineDriver class is used to test the VotingMachine class.
+ * New line to help commit
  */
 public class VotingMachineDriver {
     public static void main(String[] args) {
