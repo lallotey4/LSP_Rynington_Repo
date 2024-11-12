@@ -1,4 +1,4 @@
-package org.howard.edu.lsp.assignment5;
+package org.howard.edu.lsp.assignment6;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,6 +138,21 @@ public class IntegerSet {
      */
     public void diff(IntegerSet intSetb) {
         set.removeAll(intSetb.set);  // Remove elements that exist in intSetb from this set
+    }
+    
+    /**
+     * Modifies this set to be the complement of itself with respect to another set.
+     * The complement will be all elements in intSetb that are not in this set.
+     * @param intSetb the set to use as a reference for complement
+     */
+    public void complement(IntegerSet intSetb) {
+        List<Integer> result = new ArrayList<Integer>();
+        for (int num : intSetb.set) {
+            if (!this.set.contains(num)) {
+                result.add(num);
+            }
+        }
+        this.set = result;  // Update this set with the result of the complement operation
     }
 
     /**
