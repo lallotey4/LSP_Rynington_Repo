@@ -3,10 +3,9 @@ package org.howard.edu.lsp.assignment5;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * This class represents a set of integers and allows basic set operations like 
- * union, intersection, and difference.
+ * union, intersection, difference, and complement.
  */
 public class IntegerSet {
 
@@ -36,15 +35,11 @@ public class IntegerSet {
     /**
      * Checks if this set is equal to another set.
      * Two sets are equal if they contain the same elements, regardless of order.
-     * @param o the other object to compare
+     * @param otherSet the other IntegerSet to compare
      * @return true if the sets are equal, false otherwise
      */
-    public boolean equals(Object o) {
-        if (o instanceof IntegerSet) {
-            IntegerSet otherSet = (IntegerSet) o;
-            return this.set.containsAll(otherSet.set) && otherSet.set.containsAll(this.set);
-        }
-        return false;
+    public boolean equals(IntegerSet otherSet) {
+        return this.set.containsAll(otherSet.set) && otherSet.set.containsAll(this.set);
     }
 
     /**
@@ -53,23 +48,23 @@ public class IntegerSet {
      * @return true if the set contains the value, false otherwise
      */
     public boolean contains(int value) {
-        return set.contains(value);  // Check if the value exists in the set
+        return set.contains(value);
     }
 
     /**
      * Returns the largest element in the set.
      * @return the largest value
-     * @throws IllegalStateException if the set is empty
+     * @throws IntegerSetException if the set is empty
      */
-    public int largest() {
+    public int largest() throws IntegerSetException {
         if (set.isEmpty()) {
-            throw new IllegalStateException("Set is empty.");
+            throw new IntegerSetException("Set is empty.");
         }
 
-        int max = set.get(0);  // Assume first element is the largest
+        int max = set.get(0);
         for (int num : set) {
             if (num > max) {
-                max = num;  // Update max if a larger number is found
+                max = num;
             }
         }
         return max;
@@ -78,17 +73,17 @@ public class IntegerSet {
     /**
      * Returns the smallest element in the set.
      * @return the smallest value
-     * @throws IllegalStateException if the set is empty
+     * @throws IntegerSetException if the set is empty
      */
-    public int smallest() {
+    public int smallest() throws IntegerSetException {
         if (set.isEmpty()) {
-            throw new IllegalStateException("Set is empty.");
+            throw new IntegerSetException("Set is empty.");
         }
 
-        int min = set.get(0);  // Assume first element is the smallest
+        int min = set.get(0);
         for (int num : set) {
             if (num < min) {
-                min = num;  // Update min if a smaller number is found
+                min = num;
             }
         }
         return min;
@@ -100,7 +95,7 @@ public class IntegerSet {
      */
     public void add(int item) {
         if (!set.contains(item)) {
-            set.add(item);  // Only add the item if it's not already in the set
+            set.add(item);
         }
     }
 
@@ -109,7 +104,7 @@ public class IntegerSet {
      * @param item the integer to remove from the set
      */
     public void remove(int item) {
-        set.remove(Integer.valueOf(item));  // Remove the item if it exists
+        set.remove(Integer.valueOf(item));
     }
 
     /**
@@ -119,7 +114,7 @@ public class IntegerSet {
     public void union(IntegerSet intSetb) {
         for (int num : intSetb.set) {
             if (!set.contains(num)) {
-                set.add(num);  // Add elements from intSetb that aren't already in this set
+                set.add(num);
             }
         }
     }
@@ -129,7 +124,7 @@ public class IntegerSet {
      * @param intSetb the other set to perform intersection with
      */
     public void intersect(IntegerSet intSetb) {
-        set.removeIf(num -> !intSetb.set.contains(num));  // Keep only elements that exist in both sets
+        set.removeIf(num -> !intSetb.set.contains(num));
     }
 
     /**
@@ -137,7 +132,22 @@ public class IntegerSet {
      * @param intSetb the other set to perform difference with
      */
     public void diff(IntegerSet intSetb) {
-        set.removeAll(intSetb.set);  // Remove elements that exist in intSetb from this set
+        set.removeAll(intSetb.set);
+    }
+
+    /**
+     * Modifies this set to be the complement of itself with respect to another set.
+     * The complement is defined as elements in intSetb that are not in this set.
+     * @param intSetb the universal set to use for complement
+     */
+    public void complement(IntegerSet intSetb) {
+        List<Integer> complementSet = new ArrayList<>();
+        for (int num : intSetb.set) {
+            if (!this.set.contains(num)) {
+                complementSet.add(num);
+            }
+        }
+        set = complementSet;
     }
 
     /**
@@ -154,6 +164,6 @@ public class IntegerSet {
      */
     @Override
     public String toString() {
-        return set.toString();  // Convert the set to a string format like [1, 2, 3]
+        return set.toString();
     }
 }
